@@ -1,0 +1,9 @@
+_id
+brandName
+headquarters
+yearCreated
+numberOfLocations
+yearsFounded
+yearFounded
+brand
+hqAddress
