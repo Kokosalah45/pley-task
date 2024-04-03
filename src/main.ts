@@ -6,6 +6,7 @@ import castOrGetDefault from "./utils/castOrGetDefault";
 import { prompt } from "enquirer";
 import mongoose from "mongoose";
 import Spinnies from "spinnies";
+import exportFile from "./scripts/exportFile";
 
 const wrongFieldsMap: Record<BrandTypeKeys, string[]> = {
   brandName: ["brand"],
@@ -52,7 +53,8 @@ async function main(): Promise<void> {
   try {
     const response = await prompt<{
       collectionName: string;
-      filePath: string;
+      importFilePath: string;
+      exportFilePath: string;
       username: string;
       password: string;
       databaseName: string;
@@ -71,7 +73,13 @@ async function main(): Promise<void> {
       },
       {
         type: "input",
-        name: "filePath",
+        name: "importFilePath",
+        message: "What is the path to the file?",
+        initial: "~/Downloads/brands.json",
+      },
+      {
+        type: "input",
+        name: "exportFilePath",
         message: "What is the path to the file?",
         initial: "~/Downloads/brands.json",
       },
@@ -93,7 +101,7 @@ async function main(): Promise<void> {
     await importFile({
       databaseName: response.databaseName,
       collectionName: response.collectionName,
-      filePath: response.filePath,
+      filePath: response.importFilePath,
       username: response.username,
       password: response.password,
     });
@@ -144,6 +152,16 @@ async function main(): Promise<void> {
     spinnies.add("document-insert", { text: "Inserting documents..." });
     await BrandModel.insertMany(filledInDocs);
     spinnies.succeed("document-insert", { text: "Inserted documents" });
+
+    spinnies.add("file-export", { text: "Exporting file..." });
+    await exportFile({
+      databaseName: response.databaseName,
+      collectionName: response.collectionName,
+      filePath: response.exportFilePath,
+      username: response.username,
+      password: response.password,
+    });
+    spinnies.succeed("file-export", { text: "Exported file" });
 
     spinnies.add("database-close", { text: "Closing connection..." });
     await mongoose.disconnect();
