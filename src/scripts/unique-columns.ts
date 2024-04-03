@@ -1,18 +1,12 @@
 import "dotenv/config";
-import { getConnection } from "../db";
+
 import { BrandModel, brandSchema } from "../schemas/brands.schema";
-import importFile from "./importFile";
+import { getConnection } from "../db";
+
 import fs from "fs";
 
 const CURSOR = 5;
 async function run() {
-  await importFile({
-    databaseName: "brands",
-    collectionName: "brands",
-    filePath: "./brands.json",
-    username: "destro45",
-    password: "Kmkm561111aeae",
-  });
   await getConnection();
   const docsLength = await BrandModel.countDocuments({});
   const iteration = Math.floor(docsLength) / CURSOR;
