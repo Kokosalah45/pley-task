@@ -6,7 +6,13 @@ import fs from "fs";
 
 const CURSOR = 5;
 async function run() {
-  await importFile();
+  await importFile({
+    databaseName: "brands",
+    collectionName: "brands",
+    filePath: "./brands.json",
+    username: "destro45",
+    password: "Kmkm561111aeae",
+  });
   await getConnection();
   const docsLength = await BrandModel.countDocuments({});
   const iteration = Math.floor(docsLength) / CURSOR;
