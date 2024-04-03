@@ -1,0 +1,27 @@
+{
+  "name": "migrating-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/main.ts",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "ts-node ./src/main.ts",
+    "generate:unique": "ts-node ./src/unique-columns.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@types/spinnies": "^0.5.3",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "enquirer": "^2.4.1",
+    "exceljs": "^4.4.0",
+    "mongoose": "^8.2.4",
+    "spinnies": "^0.5.1"
+  }
+}
