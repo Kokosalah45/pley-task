@@ -7,6 +7,7 @@ import { prompt } from "enquirer";
 import mongoose from "mongoose";
 import Spinnies from "spinnies";
 import exportFile from "./scripts/exportFile";
+import path from "path";
 
 const wrongFieldsMap: Record<BrandTypeKeys, string[]> = {
   brandName: ["brand"],
@@ -74,14 +75,14 @@ async function main(): Promise<void> {
       {
         type: "input",
         name: "importFilePath",
-        message: "What is the path to the file?",
-        initial: "~/Downloads/brands.json",
+        message: "What is the path to the file to import?",
+        initial: path.join(__dirname, "../seed/brands.json"),
       },
       {
         type: "input",
         name: "exportFilePath",
-        message: "What is the path to the file?",
-        initial: "~/Downloads/brands.json",
+        message: "What is the path of the export?",
+        initial: path.join(__dirname, "../result/dumbb.json"),
       },
       {
         type: "input",

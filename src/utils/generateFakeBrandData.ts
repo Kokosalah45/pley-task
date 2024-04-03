@@ -5,6 +5,6 @@ export default function generateFakeBrandData() {
     brandName: fakerEN.company.name(),
     yearFounded: fakerEN.number.int({ min: 1600, max: new Date().getFullYear() }),
     headquarters: fakerEN.location.streetAddress({ useFullAddress: true }),
-    numberOfLocations: fakerEN.number.int({ min: 1 }),
+    numberOfLocations: fakerEN.number.int({ min: 1, max: 1e5 }),
   };
 }

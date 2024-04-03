@@ -21,7 +21,6 @@ export default async function exportFile({
 }: ExecInputs) {
   const command = `mongoexport ${process.env.DATABASE_SHELL_URL} --db ${databaseName} --collection ${collectionName}  --out ${filePath} --username ${username} --password ${password} --jsonArray `;
   try {
-    console.log({ command });
     const { stderr, stdout } = await execAync(command);
     return { stderr, stdout };
   } catch (error) {
